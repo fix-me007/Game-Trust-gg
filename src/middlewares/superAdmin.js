@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-const jwtTokenMiddleware = (req, res, next) => {
+const onlySuperAdmin = (req, res, next) => {
 
     const token = req.headers.authorization?.split(" ")[1]
 
@@ -18,7 +18,19 @@ const jwtTokenMiddleware = (req, res, next) => {
         if (err) {
             return res.status(401).json({ message: "Unauthorized: Invalid token" })
         }
-        console.log("321 get payload");
+
+
+        console.log("payload", payload.role);
+        
+
+        if (payload.role !== "super_admin") {
+            return res.status(403).json({
+                message: "Only SuperAdmin"
+            });
+        }
+
+
+        console.log("321 get payload")
         const user_id = payload.id
         console.log(user_id)
         req.user = user_id
@@ -27,4 +39,4 @@ const jwtTokenMiddleware = (req, res, next) => {
     })
 }
 
-export { jwtTokenMiddleware }
+export { onlySuperAdmin }

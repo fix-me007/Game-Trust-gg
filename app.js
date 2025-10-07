@@ -6,7 +6,8 @@ dotenv.config()
 import { query } from "./src/libs/pool-query.js"
 
 // import router
-import userRouter from "./src/routes/userRouter.js"
+import userRouter from "./src/routes/common/userRouter.js"
+import walletRouter from "./src/routes/common/walletRouter.js"
 
 // uploadthing
 import uploadRouter from "./src/libs/uploadthing.js"
@@ -31,6 +32,7 @@ app.use(
 
 // main route
 app.use(`${API_PREFIX}/users`, userRouter)
+app.use(`${API_PREFIX}/wallet`, walletRouter)
 app.get("/", (req, res) => {
   res.json({
     success: true,

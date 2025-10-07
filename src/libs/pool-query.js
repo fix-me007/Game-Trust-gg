@@ -2,7 +2,7 @@ import { Pool } from 'pg'
 import dotenv from 'dotenv'
 dotenv.config();
 
-const pool = new Pool({
+export const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     // ถ้ารันแล้วเจอปัญหา certificate บนบาง environment ให้ใช้ rejectUnauthorized:false
     // แต่การตั้งนี้จะลดการตรวจสอบใบรับรอง — ระวังความปลอดภัยใน production
